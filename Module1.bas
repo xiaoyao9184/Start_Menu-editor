@@ -3,7 +3,8 @@ Option Explicit
 Public element() As one_element '元素
 Public nownum As Integer '目前元素NUM
 Public lastnum As Integer '前一个元素NUM
-Public linzi2_6 As Boolean '林子2.6版
+Public linzi As Boolean '林子中文版
+Public Bg_P As Boolean '背景图片(林子2.6版)
 
 
 '元素
@@ -16,6 +17,7 @@ End Type
 
 
 Public SavePath As String '保存路径
+Public SaveName As String '保存名称
 
 Public iButton(2) As Integer '隐藏菜单
 
@@ -64,17 +66,19 @@ Public Sub Main()
     '取得命令行参数
     If Len(Command()) <> 0 Then
         Dim iName As String '路径
-        Dim qwe As Variant
+        Dim qwe As Variant, qwe2 As Variant
         iName = Replace(Command(), Chr(34), "") '替换"为空
-        Open3 (iName)
         qwe = Split(iName, "\")
+        qwe2 = Split(qwe(UBound(qwe)), ".")
+        If Open3(Left(iName, Len(iName) - Len(qwe(UBound(qwe)))), CStr(qwe(0))) = False Then Exit Sub
+        SaveName = qwe2(0)
         SavePath = Left(iName, Len(iName) - Len(qwe(UBound(qwe))))
         frmMain.mSave.Enabled = True
         frmMain.maSave.Enabled = True
     End If
 frmMain.Caption = GetINI("lng", "MainCaption", App.Path & "\Config.ini")
-frmMain.mFile.Caption = GetINI("lng", "munFile", App.Path & "\Config.ini")
-frmMain.mNew.Caption = GetINI("lng", "munNew", App.Path & "\Config.ini")
+frmMain.mFile.Caption = GetINI("lng", "mFile", App.Path & "\Config.ini")
+frmMain.mNew.Caption = GetINI("lng", "mNew", App.Path & "\Config.ini")
 
 frmMain.mOpen.Caption = GetINI("lng", "mOpen", App.Path & "\Config.ini")
 frmMain.mSave.Caption = GetINI("lng", "mSave", App.Path & "\Config.ini")
@@ -102,14 +106,14 @@ frmMain.lblNum.Caption = GetINI("lng", "items_num", App.Path & "\Config.ini")
 frmMain.lblW.Caption = GetINI("lng", "Item_width", App.Path & "\Config.ini")
 frmMain.lblH.Caption = GetINI("lng", "Item_height", App.Path & "\Config.ini")
 frmMain.LblBg_P.Caption = GetINI("lng", "Bg_Picture_YPosition", App.Path & "\Config.ini")
+frmMain.LblBg_P.ToolTipText = GetINI("lng", "Lab_Bg_Picture_Tip", App.Path & "\Config.ini")
 frmMain.lblColor(7).Caption = GetINI("lng", "BackgroundColor", App.Path & "\Config.ini")
 frmMain.lblColor(8).Caption = GetINI("lng", "TextColor", App.Path & "\Config.ini")
-frmMain.lblColor(9).Caption = GetINI("lng", "Line1Color", App.Path & "\Config.ini")
-frmMain.lblColor(10).Caption = GetINI("lng", "Line2Color", App.Path & "\Config.ini")
+frmMain.lblColor(9).Caption = GetINI("lng", "CusorColor", App.Path & "\Config.ini")
+frmMain.lblColor(10).Caption = GetINI("lng", "Line1Color", App.Path & "\Config.ini")
 frmMain.lblColor(11).Caption = GetINI("lng", "Line2Color", App.Path & "\Config.ini")
 frmMain.lblColor(12).Caption = GetINI("lng", "Line3Color", App.Path & "\Config.ini")
 frmMain.lblColor(13).Caption = GetINI("lng", "Line4Color", App.Path & "\Config.ini")
-frmMain.lblColor(6).Caption = GetINI("lng", "CusorColor", App.Path & "\Config.ini")
 frmMain.cbbfontNO.Text = GetINI("lng", "Font", App.Path & "\Config.ini")
 
 
@@ -128,7 +132,7 @@ frmSetting.cmdapply.Caption = GetINI("lng", "cmdapply", App.Path & "\Config.ini"
 End Sub
 
 '读文件
-Public Function Open3(Path As String) As Boolean
+Public Function Open3(Path As String, name As String) As Boolean
 Dim one(1) As Byte '行变量
 Dim i As String '行变量
 Dim qwe As Variant '元素变量
@@ -138,33 +142,39 @@ Dim truePath As String '正确的路径
 ReDim element(0) As one_element
 frmMain.ImageList1.ListImages.Clear
 frmMain.TreeView1.Nodes.Clear
+
 '检测图片目录
 If Len(Dir(Replace(Path & "\icons\", "\\", "\"))) = 0 Then MsgBox GetINI("lng", "Open_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini"): Open3 = False: Exit Function
-
-
+If name = "" Then name = "Start_Menu"
 nownum = 1
-element(0).image = Replace(IIf(SavePath = "", App.Path & "\Temp\", SavePath & "\icon\"), "\\", "\")
+element(0).image = Replace(IIf(SavePath = "", App.Path & "\Temp\", SavePath & "\icons\"), "\\", "\")
 
 'INI文件
-truePath = Replace(Path & "\Start_menu.ini", "\\", "\")
-If Get_TruePath(truePath, "*.ini") = False Then Exit Function
+linzi = False
+truePath = Replace(Path & "\" & name & ".ini", "\\", "\")
+If Get_TruePath(truePath, "*.ini") = False Then Open3 = False: Exit Function
 Open truePath For Binary As #1
     Line Input #1, i
         frmMain.txtStart.Text = Mid(i, 10)
-    Line Input #1, i
-        frmMain.txtOffset.Text = Mid(i, 8)
+        If Not (EOF(1)) Then
+            Line Input #1, i
+            If i <> "" Then frmMain.txtOffset.Text = Mid(i, 8): frmMain.txtOffset.Visible = True: frmMain.LblGBKMAP.Visible = True: linzi = True
+        End If
 Close #1
 
 'SKN文件
-truePath = Replace(Path & "\Start_Menu.skn", "\\", "\")
-If Get_TruePath(truePath, "*.skn") = False Then Exit Function
+truePath = Replace(Path & "\" & name & ".skn", "\\", "\")
+If Get_TruePath(truePath, "*.skn") = False Then Open3 = False: Exit Function
 
 frmMain.txtX.Text = GetINI("Start_menu_Skin", "Item_width", truePath)
 frmMain.txtY.Text = GetINI("Start_menu_Skin", "Item_height", truePath)
 frmMain.txtPict.Text = GetINI("Start_menu_Skin", "Bg_Picture_YPosition", truePath)
-    linzi2_6 = IIf(frmMain.txtPict.Text = "", False, True)
-    'frmMain.Label9.Visible = IIf(frmMain.txtPict.Text = "", False, True)
-    'frmMain.txtPict.Visible = IIf(frmMain.txtPict.Text = "", False, True)
+    If linzi = False And frmMain.txtPict.Text <> "" Then
+        If MsgBox(GetINI("lng", "OpenSKN_MG", App.Path & "\Config.ini"), vbOKCancel, GetINI("lng", "warn_MG", App.Path & "\Config.ini")) = vbCancel Then Open3 = False: Exit Function
+    End If
+    linzi = IIf(frmMain.txtPict.Text = "", False, True) '有BG_P，是中文版
+    frmMain.txtPict.Enabled = IIf(frmMain.txtPict.Text = "", False, True)
+    frmMain.txtPict.Text = IIf(frmMain.txtPict.Text = "", "0", frmMain.txtPict.Text)
 frmMain.txtNum.Text = GetINI("Start_menu_Skin", "items_num", truePath)
 frmMain.cbbfontNO.ListIndex = GetINI("Start_menu_Skin", "Font", truePath)
 
@@ -179,8 +189,8 @@ For one(0) = 0 To 6
 Next
 
 'menu文件
-truePath = Replace(Path & "\Start_Menu.menu", "\\", "\")
-If Get_TruePath(truePath, "*.menu") = False Then Exit Function
+truePath = Replace(Path & "\" & name & ".menu", "\\", "\")
+If Get_TruePath(truePath, "*.menu") = False Then Open3 = False: Exit Function
 Open truePath For Binary As #1
 
     Do Until EOF(1)
@@ -206,9 +216,14 @@ Open truePath For Binary As #1
                 qwe = Split(i, "/")
                 relative = qwe(UBound(qwe) - 1)
             End If
+        '判断是否为linzi中文版
+        ElseIf Mid(i, 1, 8) = "#/End/" Then
+            If linzi = False Then
+                If MsgBox(GetINI("lng", "OpenMENU_MG", App.Path & "\Config.ini"), vbOKCancel, GetINI("lng", "warn_MG", App.Path & "\Config.ini")) = vbCancel Then Open3 = False: Exit Function
+            End If
+            linzi = True
         '元素
         ElseIf Mid(i, 1, 8) <> "#/End/" And Len(i) <> 0 Then
-        
             ReDim Preserve element(UBound(element) + 1)
             '取得元素名、路径代码、图片名、有无子级
             qwe = Split(i, ";")
@@ -245,6 +260,8 @@ Close #1
 '初始化
     lastnum = 1
     nownum = 1
+    frmMain.LblEorC.Caption = GetINI("lng", "LblEorC-C", App.Path & "\Config.ini")
+    If linzi = False Then frmMain.LblGBKMAP.Visible = False: frmMain.txtOffset.Visible = False: frmMain.LblBg_P.Visible = False: frmMain.txtPict.Visible = False: frmMain.LblEorC.Caption = GetINI("lng", "LblEorC-E", App.Path & "\Config.ini")
 '刷新预览
     Call iPrint(frmMain.TreeView1.Nodes.Item(1), True, True)
 '完成
@@ -301,16 +318,17 @@ End Function
 
 
 
-Public Function Save3(Path As String) As Boolean
+Public Function Save3(Path As String, name As String) As Boolean
+    If name = "" Then name = "Start_Menu"
 'INI文件
-    Open Path & "\Start_Menu.ini" For Output As #2
+    Open Path & "\" & name & ".ini" For Output As #2
         Print #2, "Register=" & frmMain.txtStart.Text
-        Print #2, "GBKMAP=" & frmMain.txtOffset.Text
+        If linzi = True Then Print #2, "GBKMAP=" & frmMain.txtOffset.Text
     Close #2
 'SKN文件
-WriteINI "Start_menu_Skin", "Item_width", frmMain.txtX.Text, Replace(Path & "\Start_Menu.skn", "\\", "\")
-WriteINI "Start_menu_Skin", "Item_height", frmMain.txtY.Text, Replace(Path & "\Start_Menu.skn", "\\", "\")
-If linzi2_6 = True Then WriteINI "Start_menu_Skin", "Bg_Picture_YPosition", frmMain.txtPict.Text, Replace(Path & "\Start_Menu.skn", "\\", "\")
+WriteINI "Start_menu_Skin", "Item_width", frmMain.txtX.Text, Replace(Path & "\" & name & ".skn", "\\", "\")
+WriteINI "Start_menu_Skin", "Item_height", frmMain.txtY.Text, Replace(Path & "\" & name & ".skn", "\\", "\")
+If linzi = True And frmMain.txtPict.Enabled = True Then WriteINI "Start_menu_Skin", "Bg_Picture_YPosition", frmMain.txtPict.Text, Replace(Path & "\" & name & ".skn", "\\", "\")
 Dim s(6) As String
 s(0) = "BackgroundColor": s(1) = "TextColor": s(6) = "CusorColor"
 s(2) = "Line1Color": s(3) = "Line2Color": s(4) = "Line3Color": s(5) = "Line4Color"
@@ -319,13 +337,13 @@ For a = 0 To 6
     element(0).name = Hex(frmMain.lblColor(a).BackColor)
     element(0).Path_code = IIf(Len(Hex(frmMain.lblColor(a).Caption)) < 2, "0", "") & Hex(frmMain.lblColor(a).Caption)
     element(0).name = RBGT2TBGR(element(0).name, False) & element(0).Path_code
-    WriteINI "Start_menu_Skin", s(a), element(0).name, Replace(Path & "\Start_Menu.skn", "\\", "\")
+    WriteINI "Start_menu_Skin", s(a), element(0).name, Replace(Path & "\" & name & ".skn", "\\", "\")
 Next
 
-WriteINI "Start_menu_Skin", "items_num", frmMain.txtNum.Text, Replace(Path & "\Start_Menu.skn", "\\", "\")
-WriteINI "Start_menu_Skin", "Font", frmMain.cbbfontNO.ListIndex, Replace(Path & "\Start_Menu.skn", "\\", "\")
+WriteINI "Start_menu_Skin", "items_num", frmMain.txtNum.Text, Replace(Path & "\" & name & ".skn", "\\", "\")
+WriteINI "Start_menu_Skin", "Font", frmMain.cbbfontNO.ListIndex, Replace(Path & "\" & name & ".skn", "\\", "\")
 'menu文件
-    Open Path & "\Start_Menu.menu" For Output As #2
+    Open Path & "\" & name & ".menu" For Output As #2
     '最高、最前
         Do Until frmMain.TreeView1.Nodes(nownum).Parent Is Nothing
             nownum = Get_Index(frmMain.TreeView1.Nodes(nownum).Parent)
@@ -372,7 +390,7 @@ WriteINI "Start_menu_Skin", "Font", frmMain.cbbfontNO.ListIndex, Replace(Path & 
                 Allmenu(j) = Allmenu(j) & element(nownum).name & "=" & IIf(element(nownum).TF, 1, 0) & ";" & element(nownum).Path_code & ";" & element(nownum).image & Chr(13) & Chr(10)
                 nownum = Get_Index(frmMain.TreeView1.Nodes(nownum).Next)
             Loop
-            Allmenu(j) = "#/Start/" & Replace(isubname(j), "\", "/") & Chr(13) & Chr(10) & Allmenu(j) & IIf(linzi2_6 = True, "#/End/" & Chr(13) & Chr(10), "")
+            Allmenu(j) = "#/Start/" & Replace(isubname(j), "\", "/") & Chr(13) & Chr(10) & Allmenu(j) & IIf(linzi = True, "#/End/" & Chr(13) & Chr(10), "")
         Next
     '写入文件
         For i = 0 To UBound(Allmenu)
@@ -398,15 +416,15 @@ Public Sub iPrint(name As String, Tline As Boolean, Ticon As Boolean)
 'Line是以0开始计数的，故-2
     Dim H As Integer
     H = CInt(frmMain.txtNum.Text) * CInt(frmMain.txtY.Text)
-'背景图片
-If linzi2_6 = True Then
+'背景图片（是中文版&坐标不是0）
+If linzi = True And CInt(frmMain.txtPict.Text) <> 0 Then
     frmMain.Wallpaper.Picture = LoadPicture(LoadP(GetINI("Setting", "WallpaperPath", App.Path & "\Config.ini"), 3))
     Tline = False
     Ticon = True
     frmMain.Picture1.AutoSize = True
     frmMain.Picture1.Picture = LoadPicture(LoadP(IIf(SavePath = "", App.Path, SavePath) & "\SM_BG_PIC.GIF", 4))
     PPicture
-ElseIf linzi2_6 = False And Tline = True Then '背景边框
+ElseIf Tline = True Then  '背景边框
     frmMain.Wallpaper.Picture = LoadPicture(LoadP(GetINI("Setting", "WallpaperPath", App.Path & "\Config.ini"), 3))
     iLine 3, 220 - H - 20 - 4 - 1 - 1, CInt(frmMain.txtX.Text) - 2 + 2, H - 2 + 2, frmMain.lblColor(2).BackColor, True
     iLine 2, 220 - H - 20 - 4 - 1 - 2, CInt(frmMain.txtX.Text) - 2 + 4, H - 2 + 4, frmMain.lblColor(3).BackColor, True
@@ -420,7 +438,7 @@ End If
 
 '图片文字
 If Ticon = True Then
-    If linzi2_6 = False Then iLine 4, 220 - H - 20 - 4 - 1, CInt(frmMain.txtX.Text) - 2, H - 2, frmMain.lblColor(0).BackColor, False
+    If CInt(frmMain.txtPict.Text) = 0 Then iLine 4, 220 - H - 20 - 4 - 1, CInt(frmMain.txtX.Text) - 2, H - 2, frmMain.lblColor(0).BackColor, False
     For i = 1 To UBound(ALLname)
         frmMain.Iicon(i).Picture = LoadPicture(LoadP(element(0).image & element(Get_Index(CStr(ALLname(i)))).image, 1))
         frmMain.Iicon(i).Top = 220 - CInt(frmMain.txtNum.Text) * CInt(frmMain.txtY.Text) - 20 - 4 - 1 + (i - 1) * CInt(frmMain.txtY.Text) + 2
@@ -437,7 +455,7 @@ If Ticon = True Then
 End If
 
 '鼠标边框
-If linzi2_6 = False Then
+If CInt(frmMain.txtPict.Text) = 0 Then
     For i = 1 To CInt(frmMain.txtNum.Text)
         iLine 5, 220 - H - 20 - 4 - 1 + (i - 1) * CInt(frmMain.txtY.Text) + 1, CInt(frmMain.txtX.Text) - 2 - 2, CInt(frmMain.txtY.Text) - 2 - 1, frmMain.lblColor(0).BackColor, True
     Next

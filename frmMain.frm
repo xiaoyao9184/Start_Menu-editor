@@ -2,14 +2,17 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmMain 
+   BorderStyle     =   0  'None
    Caption         =   "Start_Menu 编辑器"
    ClientHeight    =   5310
-   ClientLeft      =   165
-   ClientTop       =   885
+   ClientLeft      =   150
+   ClientTop       =   870
    ClientWidth     =   8310
    LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
    ScaleHeight     =   5310
    ScaleWidth      =   8310
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   3  '窗口缺省
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
@@ -29,7 +32,7 @@ Begin VB.Form frmMain
    Begin VB.CommandButton cmdRes 
       Caption         =   "刷新"
       Height          =   495
-      Left            =   600
+      Left            =   960
       TabIndex        =   29
       Top             =   4200
       Width           =   855
@@ -335,6 +338,14 @@ Begin VB.Form frmMain
          Width           =   330
       End
    End
+   Begin VB.Label LblEorC 
+      Caption         =   "中文"
+      Height          =   255
+      Left            =   120
+      TabIndex        =   38
+      Top             =   4440
+      Width           =   735
+   End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
@@ -594,6 +605,9 @@ Begin VB.Form frmMain
       Begin VB.Menu mDeleIm 
          Caption         =   "删除图片"
       End
+      Begin VB.Menu mOpenIm 
+         Caption         =   "打开图片目录"
+      End
    End
 End
 Attribute VB_Name = "frmMain"
@@ -609,27 +623,27 @@ Private Sub Form_Load()
     picIcons.Visible = False
     frmMain.Wallpaper.ZOrder 0
     
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO00", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO01", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO02", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO03", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO04", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO05", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO06", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO07", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO08", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO09", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO0A", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO0B", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO0C", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO0D", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO0E", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO0F", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO10", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO11", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO12", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO13", App.Path & "\Config.ini")
-cbbfontNO.AddItem GetINI("lng", "cbbfontNO14", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO00", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO01", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO02", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO03", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO04", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO05", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO06", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO07", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO08", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO09", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO0A", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO0B", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO0C", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO0D", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO0E", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO0F", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO10", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO11", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO12", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO13", App.Path & "\Config.ini")
+    cbbfontNO.AddItem GetINI("lng", "cbbfontNO14", App.Path & "\Config.ini")
 
 
 '添加GIF编辑器菜单
@@ -640,15 +654,11 @@ cbbfontNO.AddItem GetINI("lng", "cbbfontNO14", App.Path & "\Config.ini")
         frmMain.mEditPath(i).Caption = j(i)
     Next
 End Sub
-
-
-
-
-
-
-Private Sub Label3_Click()
-
+Private Sub Form_Unload(Cancel As Integer)
+    End
 End Sub
+
+
 
 '****************************************************************
 
@@ -657,16 +667,16 @@ End Sub
 Private Sub mNew_Click()
         Dim fs, f
         Set fs = CreateObject("Scripting.FileSystemObject")
-
-        If Len(Dir(App.Path & "\SM_BG_PIC.GIF")) <> 0 Then fs.DeleteFile App.Path & "\SM_BG_PIC.GIF", False
-        Set f = fs.GetFile(App.Path & "\Default\SM_BG_PIC.GIF")
-        f.Copy App.Path & "\SM_BG_PIC.GIF"
-        
+        '复制SM_BG_PIC.GIF到程序目录下
+        If Len(Dir(Replace(App.Path & "\SM_BG_PIC.GIF", "\\", "\"))) <> 0 Then fs.DeleteFile Replace(App.Path & "\SM_BG_PIC.GIF", "\\", "\"), False
+        Set f = fs.GetFile(Replace(App.Path & "\Default\SM_BG_PIC.GIF", "\\", "\"))
+        f.Copy Replace(App.Path & "\SM_BG_PIC.GIF", "\\", "\")
+        '临时图标文件夹
         On Error Resume Next
-        fs.DeleteFolder App.Path & "\Temp", False
-        Set f = fs.GetFolder(App.Path & "\Default\icons\")
-        f.Copy App.Path & "\Temp"
-    If Open3(App.Path & "\Default\") = False Then Exit Sub
+        fs.DeleteFolder Replace(App.Path & "\Temp", "\\", "\"), False
+        Set f = fs.GetFolder(Replace(App.Path & "\Default\icons\", "\\", "\"))
+        f.Copy (Replace(App.Path & "\Temp", "\\", "\"))
+    If Open3(Replace(App.Path & "\Default\", "\\", "\"), "") = False Then Exit Sub
     SavePath = ""
 End Sub
 Private Sub mOpen_Click()
@@ -675,12 +685,16 @@ Private Sub mOpen_Click()
     On Error Resume Next
     CommonDialog1.ShowOpen
     If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
-    If Open3(Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle))) = False Then Exit Sub
+    Dim qwe As Variant
+    qwe = Split(CommonDialog1.FileTitle, ".")
+    If Open3(Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle)), CStr(qwe(0))) = False Then: Exit Sub
+
+    SaveName = qwe(0)
     SavePath = Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle))
 End Sub
 Private Sub mSave_Click()
     If SavePath = "" Then Call maSave_Click: Exit Sub
-    Save3 (SavePath)
+    If Save3(SavePath, SaveName) = True Then MsgBox GetINI("lng", "SaveOK_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "title_MG", App.Path & "\Config.ini")
 End Sub
 Private Sub maSave_Click()
     CommonDialog1.Filter = GetINI("lng", "munSaveAs_CF", App.Path & "\Config.ini")
@@ -688,12 +702,24 @@ Private Sub maSave_Click()
     On Error Resume Next
     CommonDialog1.ShowSave
     If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
+    Dim qwe As Variant
+    qwe = Split(CommonDialog1.FileTitle, ".")
+    If Save3(Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle)), CStr(qwe(0))) = False Then Exit Sub
+    '移动图标目录
         Dim fs, f
+        Dim i As String
         Set fs = CreateObject("Scripting.FileSystemObject")
-        Set f = fs.GetFolder(IIf(SavePath = "", App.Path & "\Temp\", SavePath & "icons\"))
+        Set f = fs.GetFolder(Replace(IIf(SavePath = "", App.Path & "\Temp\", SavePath & "icons\"), "\\", "\"))
         f.Copy Mid(CommonDialog1.FileName, 1, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle))
+        i = IIf(SavePath = "", "\Temp", "\icons")
+    '重命名图标目录
+    If Len(Dir(Replace(SavePath & "\icons\", "\\", "\"))) <> 0 Then fs.DeleteFolder Replace(SavePath & "\icons", "\\", "\"), False
+    Name Replace(SavePath & i, "\\", "\") As Replace(SavePath & "\icons", "\\", "\")
+    element(0).image = Replace(SavePath & "\icons\", "\\", "\")
+
+    SaveName = qwe(0)
     SavePath = Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle))
-    Save3 (SavePath)
+    MsgBox GetINI("lng", "SaveOK_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "title_MG", App.Path & "\Config.ini")
 End Sub
 Private Sub mExit_Click()
     If MsgBox(GetINI("lng", "mExit_SavePrompt_MG", App.Path & "\Config.ini"), _
@@ -726,7 +752,6 @@ Private Sub mDown_Click() '下
 End Sub
 Private Sub mdele_Click() '删除
     TreeView1.Nodes.Remove (TreeView1.SelectedItem.Index)
-    
     element(nownum).name = element(UBound(element)).name
     element(nownum).image = element(UBound(element)).image
     element(nownum).Path_code = element(UBound(element)).Path_code
@@ -783,12 +808,15 @@ Private Sub mDeleIm_Click()
     ImageList1.ListImages.Remove CInt(mDeleIm.Tag)
     imgIcons_Click
 End Sub
-
+'右键：打开图片目录
+Private Sub mOpenIm_Click()
+    Dim sTmp As String * 200, Length As Long
+    Length = GetWindowsDirectory(sTmp, 200)
+    Shell Left(sTmp, Length) & "\explorer.exe " & Replace(IIf(SavePath = "", App.Path & "\Temp\", SavePath & "\icons\"), "\\", "\"), 4
+End Sub
 
 '刷新
 Private Sub cmdRes_Click()
-    If linzi2_6 = True And txtPict.Text = "0" Then linzi2_6 = False
-    If linzi2_6 = False And txtPict.Text <> "0" Then linzi2_6 = True
     If txtNum.Text = "" Or txtX.Text = "" Or txtY.Text = "" Then _
     MsgBox GetINI("lng", "cmdRes_noNumXY_MG", App.Path & "\Config.ini"), vbOKOnly, _
     GetINI("lng", "warn_MG", App.Path & "\Config.ini"): Exit Sub
@@ -804,6 +832,7 @@ Private Sub txtNum_KeyPress(KeyAscii As Integer)
 If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0
 If KeyAscii = 8 Then Exit Sub
 End Sub
+
 Private Sub txtStart_KeyPress(KeyAscii As Integer)
 If (KeyAscii < 48 Or (KeyAscii > 57 And KeyAscii < 65) Or (KeyAscii > 70 And KeyAscii < 97) Or KeyAscii > 102) And KeyAscii <> 120 And KeyAscii <> 88 And KeyAscii <> 8 Then KeyAscii = 0 '限制除数字、ABCDEFabcdef输入、Xx
 If (KeyAscii = 88 Or KeyAscii = 120) And txtOffset.SelStart <> 1 Then KeyAscii = 0
@@ -833,7 +862,6 @@ End Sub
 Private Sub txtName_KeyPress(KeyAscii As Integer)
     If txtName.SelStart = 0 And KeyAscii > 47 And KeyAscii < 58 Then KeyAscii = 0
 End Sub
-
 
 '****************************************************************
 
@@ -870,6 +898,21 @@ End Sub
 Private Sub txtPath_Change()
     If element(nownum).Path_code = txtPath.Text Then Exit Sub
     element(nownum).Path_code = txtPath.Text
+End Sub
+
+Private Sub LblBg_P_Click()
+txtPict.Tag = IIf(txtPict.Enabled, txtPict.Text, txtPict.Tag) '如果要关闭，将数值存入TAG
+txtPict.Text = IIf(txtPict.Enabled, 0, txtPict.Tag) '如果要关闭，将0写入TXT
+txtPict.Enabled = IIf(txtPict.Enabled, False, True) '变更
+End Sub
+Private Sub LblEorC_Click()
+If txtPict.Enabled = linzi Then LblBg_P_Click
+LblGBKMAP.Visible = IIf(linzi, False, True)
+txtOffset.Visible = IIf(linzi, False, True)
+LblBg_P.Visible = IIf(linzi, False, True)
+txtPict.Visible = IIf(linzi, False, True)
+LblEorC.Caption = GetINI("lng", IIf(linzi, "LblEorC-E", "LblEorC-C"), App.Path & "\Config.ini")
+linzi = IIf(linzi, False, True)
 End Sub
 
 '根据字符串长度扩大TXTBOX框
@@ -990,7 +1033,7 @@ For i = 0 To ImageList1.ListImages.Count - 1
     Image1(i).Left = 17 * (i Mod 8)
     Image1(i).Top = 18 * (i \ 8)
     Image1(i).Picture = ImageList1.ListImages(i + 1).Picture
-    Image1(i).ToolTipText = ImageList1.ListImages(i + 1).Key
+    Image1(i).ToolTipText = ImageList1.ListImages(i + 1).Key & " " & Image1(i).Width & "x" & Image1(i).Height
     Image1(i).Visible = True
 Next
 picIcons.Height = Screen.TwipsPerPixelY * 19 * (i \ 8 + 1)

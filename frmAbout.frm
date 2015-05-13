@@ -36,26 +36,34 @@ Begin VB.Form frmAbout
       Top             =   360
       Width           =   2895
    End
+   Begin VB.Label LblScroll 
+      Caption         =   $"frmAbout.frx":018C
+      Height          =   255
+      Left            =   1920
+      TabIndex        =   4
+      Top             =   2400
+      Width           =   11895
+   End
    Begin VB.Label warn 
       Caption         =   "警告：目前仅在程序在实验阶段，作者不负责使用此程序所产生的任何后果"
       ForeColor       =   &H000000C0&
       Height          =   375
       Left            =   120
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   2760
       Width           =   3255
    End
    Begin VB.Image Img1 
       Height          =   600
       Left            =   0
-      Picture         =   "frmAbout.frx":00D7
+      Picture         =   "frmAbout.frx":0215
       Top             =   0
       Width           =   210
    End
    Begin VB.Image Img2 
       Height          =   1680
       Left            =   0
-      Picture         =   "frmAbout.frx":04A1
+      Picture         =   "frmAbout.frx":05DF
       Top             =   360
       Width           =   1785
    End
@@ -72,17 +80,9 @@ Begin VB.Form frmAbout
       EndProperty
       Height          =   255
       Left            =   1920
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   120
       Width           =   1695
-   End
-   Begin VB.Label LblScroll 
-      Caption         =   $"frmAbout.frx":21E6
-      Height          =   255
-      Left            =   1920
-      TabIndex        =   2
-      Top             =   2400
-      Width           =   8175
    End
 End
 Attribute VB_Name = "frmAbout"
