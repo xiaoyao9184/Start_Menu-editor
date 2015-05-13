@@ -1,0 +1,13 @@
+[Start_menu_Skin]
+Item_width=87
+Item_height=21
+Bg_Picture_YPosition=21
+BackgroundColor=0xFFFFFF00
+TextColor=0x0055a100
+Line1Color=0x524D5200
+Line2Color=0x29282900
+Line3Color=0x63616300
+Line4Color=0x31343100
+CusorColor=0xff000000
+items_num=8
+Font=2

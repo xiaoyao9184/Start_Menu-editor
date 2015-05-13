@@ -1,0 +1,61 @@
+Private Sub TreeView1_OLEDragDrop(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, x As Single, y As Single)
+nownum = TreeView1.Nodes.Item(Data.GetData(vbCFText)).Index
+If TreeView1.DropHighlight Is Nothing Then Exit Sub
+TreeView1.Nodes.Item(Data.GetData(vbCFText)).FullPath = TreeView1.DropHighlight & TreeView1.PathSeparator & Data.GetData(vbCFText)
+'TreeView1.Nodes.Remove (Data.GetData(vbCFText))
+'TreeView1.Nodes.Add TreeView1.DropHighlight, 4, element(nownum).name, element(nownum).name, element(nownum).Image
+'TreeView1.DropHighlight.Children = TreeView1.DropHighlight.Children + 1
+
+End Sub
+
+Private Sub TreeView1_OLEStartDrag(Data As MSComctlLib.DataObject, AllowedEffects As Long)
+Data.SetData TreeView1.SelectedItem, vbCFText
+AllowedEffects = 1
+End Sub
+
+Private Sub TreeView1_OLEDragOver(Data As MSComctlLib.DataObject, Effect As Long, Button As Integer, Shift As Integer, x As Single, y As Single, State As Integer)
+TreeView1.DropHighlight = TreeView1.HitTest(x, y)
+End Sub
+
+
+
+
+
+=========================================
+
+Private Sub TreeView1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+If Button = 2 Then iButton(0) = 2: iButton(1) = x: iButton(2) = y
+If Button = 1 Then
+    If TreeView1.HitTest(x, y) Is Nothing Then Exit Sub
+    'nownum = TreeView1.HitTest(x, y).Index
+    'txtName.Text = element(nownum).name
+    'chkTF.Value = IIf(element(nownum).TF, 1, 0)
+    'Path_code(IIf(Len(element(nownum).Path_code) > 5, 1, 0)).Value = 1
+    'txtPath.Text = element(nownum).Path_code
+    'imgIcons.Picture = LoadPicture(element(0).Image & element(nownum).Image)
+    If TreeView1.HitTest(x, y) <> TreeView1.SelectedItem Then Exit Sub
+    indrag = True
+End If
+End Sub
+
+Private Sub TreeView1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+    If Button = vbLeftButton Then '指示一个拖动操作。
+        indrag = True '设置 flag 为 true。
+      '使用CreateDragImage方法设置拖动图标。
+        TreeView1.DragIcon = TreeView1.SelectedItem.CreateDragImage
+        TreeView1.Drag vbBeginDrag '拖动操作。
+    Else
+        indrag = False
+    End If
+End Sub
+
+Private Sub TreeView1_DragOver(Source As Control, x As Single, y As Single, State As Integer)
+    If indrag = True Then TreeView1.DropHighlight = TreeView1.HitTest(x, y)
+End Sub
+
+Private Sub TreeView1_DragDrop(Source As Control, x As Single, y As Single)
+      Set TreeView1.DropHighlight = Nothing
+      indrag = False
+      TreeView1.Drag vbEndDrag
+End Sub
+
