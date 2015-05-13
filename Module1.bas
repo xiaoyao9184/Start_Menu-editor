@@ -50,7 +50,7 @@ Private Declare Function SelectObject Lib "gdi32" (ByVal hdc As Long, _
 Private Declare Function FillRect Lib "user32" (ByVal hdc As Long, _
         lpRect As RECT, ByVal hBrush As Long) As Long
 Private Declare Function BitBlt Lib "gdi32" (ByVal hDestDC As Long, _
-        ByVal X As Long, ByVal Y As Long, ByVal nWidth As Long, _
+        ByVal x As Long, ByVal Y As Long, ByVal nWidth As Long, _
         ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal xSrc _
         As Long, ByVal ySrc As Long, ByVal dwRop As Long) As Long
 Private Declare Function CreateBrushIndirect Lib "gdi32" (lpLogBrush _
@@ -185,6 +185,7 @@ s(2) = "Line1Color": s(3) = "Line2Color": s(4) = "Line3Color": s(5) = "Line4Colo
 For one(0) = 0 To 6
     i = GetINI("Start_menu_Skin", s(one(0)), truePath)
     frmMain.lblColor(one(0)).BackColor = RBGT2TBGR(i, True)
+    frmMain.lblColor(one(0)).ForeColor = 16777215 - frmMain.lblColor(one(0)).BackColor '反色显示标题
     frmMain.lblColor(one(0)).Caption = Mid(i, 9, 2)
 Next
 
@@ -320,6 +321,37 @@ End Function
 
 Public Function Save3(Path As String, name As String) As Boolean
     If name = "" Then name = "Start_Menu"
+'检测数据符合规范
+Dim i As Integer
+For i = 1 To UBound(element)
+    If element(i).TF = True And element(i).Path_code <> "0" Then
+        element(i).Path_code = "0"
+    ElseIf element(i).TF = False And Left(element(i).Path_code, 1) = "!" Then
+        If InStr(1, element(i).Path_code, "/", 0) > 0 Then
+            MsgBox element(i).name & "： " & GetINI("lng", "Save_Path_!_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini")
+            Save3 = False
+            Exit Function
+        ElseIf Right(element(i).Path_code, 4) <> ".elf" And Right(element(i).Path_code, 4) <> ".ELF" Then
+            MsgBox element(i).name & "： " & GetINI("lng", "Save_Path_Elf_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini")
+            Save3 = False
+            Exit Function
+        End If
+    ElseIf element(i).TF = False And Left(element(i).Path_code, 2) <> "0x" Then
+        If Right(element(i).Path_code, 4) <> ".elf" And Right(element(i).Path_code, 4) <> ".ELF" Then
+            MsgBox element(i).name & "： " & GetINI("lng", "Save_Path_Elf_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini")
+            Save3 = False
+            Exit Function
+        ElseIf Left(element(i).Path_code, 3) <> "/b/" And Left(element(i).Path_code, 3) <> "/a/" And Left(element(i).Path_code, 3) <> "/c/" Then
+            MsgBox element(i).name & "： " & GetINI("lng", "Save_Path_Drive_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini")
+            Save3 = False
+            Exit Function
+        ElseIf InStr(3, element(i).Path_code, "//", 0) > 0 Then
+            MsgBox element(i).name & "： " & GetINI("lng", "Save_Path_Err_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini")
+            Save3 = False
+            Exit Function
+        End If
+    End If
+Next
 'INI文件
     Open Path & "\" & name & ".ini" For Output As #2
         Print #2, "Register=" & frmMain.txtStart.Text
@@ -335,8 +367,8 @@ s(2) = "Line1Color": s(3) = "Line2Color": s(4) = "Line3Color": s(5) = "Line4Colo
 Dim a As Byte
 For a = 0 To 6
     element(0).name = Hex(frmMain.lblColor(a).BackColor)
-    element(0).Path_code = IIf(Len(Hex(frmMain.lblColor(a).Caption)) < 2, "0", "") & Hex(frmMain.lblColor(a).Caption)
-    element(0).name = RBGT2TBGR(element(0).name, False) & element(0).Path_code
+    element(0).Path_code = IIf(Len(Hex(frmMain.lblColor(a).Caption)) < 2, "0", "") & Hex(frmMain.lblColor(a).Caption) '颜色透明度：小于两个字符时
+    element(0).name = RBGT2TBGR(element(0).name, False) & element(0).Path_code '取得颜色字符串
     WriteINI "Start_menu_Skin", s(a), element(0).name, Replace(Path & "\" & name & ".skn", "\\", "\")
 Next
 
@@ -352,12 +384,11 @@ WriteINI "Start_menu_Skin", "Font", frmMain.cbbfontNO.ListIndex, Replace(Path & 
             nownum = Get_Index(frmMain.TreeView1.Nodes(nownum).Previous)
         Loop
         
-        Dim Allmenu() As String, i As Integer, j As Integer
+        Dim Allmenu() As String, j As Integer
         Dim isubname() As String
     '取得一共有多少个组
         For i = 1 To frmMain.TreeView1.Nodes.Count
-            If frmMain.TreeView1.Nodes(i).Children Then j = j + 1
-            element(Get_Index(frmMain.TreeView1.Nodes(i))).TF = True
+            If frmMain.TreeView1.Nodes(i).Children Then j = j + 1: element(Get_Index(frmMain.TreeView1.Nodes(i))).TF = True
         Next
 
         ReDim Allmenu(j) As String
@@ -463,15 +494,15 @@ End If
     iLine 5, 220 - H - 20 - 4 - 1 + (ALLname(0) - 1) * CInt(frmMain.txtY.Text) + 1, CInt(frmMain.txtX.Text) - 2 - 2, CInt(frmMain.txtY.Text) - 2 - 1, frmMain.lblColor(6).BackColor, True
 
 End Sub
-Public Sub iLine(X%, Y%, W%, H%, iColor As Long, iTF As Boolean)
+Public Sub iLine(x%, Y%, W%, H%, iColor As Long, iTF As Boolean)
 Dim X2%, Y2%
-    X2 = X + W: Y2 = Y + H
+    X2 = x + W: Y2 = Y + H
     frmMain.Wallpaper.CurrentX = 0
     frmMain.Wallpaper.CurrentY = 0
     If iTF = True Then
-        frmMain.Wallpaper.Line Step(X, Y)-(X2, Y2), iColor, B
+        frmMain.Wallpaper.Line Step(x, Y)-(X2, Y2), iColor, B
     Else
-        frmMain.Wallpaper.Line Step(X, Y)-(X2, Y2), iColor, BF
+        frmMain.Wallpaper.Line Step(x, Y)-(X2, Y2), iColor, BF
     End If
 End Sub
 Public Sub PPicture()

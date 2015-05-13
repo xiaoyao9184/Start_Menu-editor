@@ -3,8 +3,8 @@ Begin VB.Form frmAbout
    BorderStyle     =   1  'Fixed Single
    Caption         =   "关于..."
    ClientHeight    =   3225
-   ClientLeft      =   4560
-   ClientTop       =   4590
+   ClientLeft      =   5670
+   ClientTop       =   4620
    ClientWidth     =   4905
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
@@ -37,12 +37,12 @@ Begin VB.Form frmAbout
       Width           =   2895
    End
    Begin VB.Label LblScroll 
-      Caption         =   $"frmAbout.frx":018C
+      Caption         =   $"frmAbout.frx":01D1
       Height          =   255
       Left            =   1920
       TabIndex        =   4
       Top             =   2400
-      Width           =   11895
+      Width           =   12495
    End
    Begin VB.Label warn 
       Caption         =   "警告：目前仅在程序在实验阶段，作者不负责使用此程序所产生的任何后果"
@@ -56,14 +56,14 @@ Begin VB.Form frmAbout
    Begin VB.Image Img1 
       Height          =   600
       Left            =   0
-      Picture         =   "frmAbout.frx":0215
+      Picture         =   "frmAbout.frx":0262
       Top             =   0
       Width           =   210
    End
    Begin VB.Image Img2 
       Height          =   1680
       Left            =   0
-      Picture         =   "frmAbout.frx":05DF
+      Picture         =   "frmAbout.frx":062C
       Top             =   360
       Width           =   1785
    End
@@ -93,10 +93,10 @@ Attribute VB_Exposed = False
 Private Sub cmdOK_Click()
  Unload Me
 End Sub
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 TmrScroll.Interval = 100
 End Sub
-Private Sub LblScroll_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub LblScroll_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
 TmrScroll.Interval = 15
 End Sub
 Private Sub TmrScroll_Timer()       '定时器开始
@@ -105,4 +105,7 @@ If LblScroll.Left > -CInt(LblScroll.Width) Then
 Else
  LblScroll.Left = frmAbout.Width
 End If
+End Sub
+Private Sub Form_Unload(Cancel As Integer)
+    frmMain.Enabled = True
 End Sub

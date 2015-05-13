@@ -5,6 +5,11 @@ Start_Menu编辑器
 用途：针对ELF-Start_Menu程序下的.skn.menu.ini进行可视化编辑
 
 更新记录：
+v1.2(2010-3-12)
++修复BUG
++颜色透明度编辑
++检测元素路径前、后缀
+
 v1.1(2010-3-9)
 +Bg_Picture_YPosition有无切换
 +版本切换

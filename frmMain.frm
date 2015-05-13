@@ -5,15 +5,23 @@ Begin VB.Form frmMain
    BorderStyle     =   0  'None
    Caption         =   "Start_Menu 编辑器"
    ClientHeight    =   5310
-   ClientLeft      =   150
-   ClientTop       =   870
+   ClientLeft      =   3405
+   ClientTop       =   3165
    ClientWidth     =   8310
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    ScaleHeight     =   5310
    ScaleWidth      =   8310
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   3  '窗口缺省
+   Begin VB.TextBox txtT 
+      Appearance      =   0  'Flat
+      Height          =   270
+      Left            =   2160
+      TabIndex        =   39
+      Top             =   3840
+      Visible         =   0   'False
+      Width           =   375
+   End
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       AutoSize        =   -1  'True
@@ -25,7 +33,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   73
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   81
-      TabIndex        =   37
+      TabIndex        =   38
       Top             =   360
       Width           =   1215
    End
@@ -33,14 +41,14 @@ Begin VB.Form frmMain
       Caption         =   "刷新"
       Height          =   495
       Left            =   960
-      TabIndex        =   29
+      TabIndex        =   20
       Top             =   4200
       Width           =   855
    End
    Begin VB.TextBox txtPict 
       Height          =   270
       Left            =   3840
-      TabIndex        =   27
+      TabIndex        =   6
       Text            =   "PY"
       Top             =   1200
       Width           =   495
@@ -69,7 +77,7 @@ Begin VB.Form frmMain
       Caption         =   "元素"
       Height          =   2415
       Left            =   3000
-      TabIndex        =   20
+      TabIndex        =   29
       Top             =   2520
       Width           =   5055
       Begin VB.PictureBox picIcons 
@@ -81,7 +89,7 @@ Begin VB.Form frmMain
          ScaleHeight     =   63
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   143
-         TabIndex        =   36
+         TabIndex        =   22
          Top             =   1200
          Width           =   2175
          Begin VB.Image Image1 
@@ -95,7 +103,7 @@ Begin VB.Form frmMain
       Begin VB.TextBox txtPath 
          Height          =   375
          Left            =   2640
-         TabIndex        =   25
+         TabIndex        =   19
          Text            =   "path"
          Top             =   1680
          Width           =   2295
@@ -105,7 +113,7 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   1
          Left            =   3480
-         TabIndex        =   24
+         TabIndex        =   18
          Top             =   1320
          Width           =   735
       End
@@ -114,14 +122,14 @@ Begin VB.Form frmMain
          Height          =   255
          Index           =   0
          Left            =   2640
-         TabIndex        =   23
+         TabIndex        =   17
          Top             =   1320
          Width           =   735
       End
       Begin VB.TextBox txtName 
          Height          =   375
          Left            =   2640
-         TabIndex        =   21
+         TabIndex        =   16
          Text            =   "name"
          Top             =   720
          Width           =   2295
@@ -129,7 +137,7 @@ Begin VB.Form frmMain
       Begin MSComctlLib.TreeView TreeView1 
          Height          =   2055
          Left            =   120
-         TabIndex        =   26
+         TabIndex        =   15
          Top             =   240
          Width           =   2415
          _ExtentX        =   4260
@@ -153,7 +161,7 @@ Begin VB.Form frmMain
          Caption         =   "名称"
          Height          =   255
          Left            =   3120
-         TabIndex        =   22
+         TabIndex        =   30
          Top             =   360
          Width           =   495
       End
@@ -161,7 +169,7 @@ Begin VB.Form frmMain
    Begin VB.TextBox txtY 
       Height          =   270
       Left            =   7560
-      TabIndex        =   11
+      TabIndex        =   5
       Text            =   "Y"
       Top             =   840
       Width           =   495
@@ -169,7 +177,7 @@ Begin VB.Form frmMain
    Begin VB.TextBox txtX 
       Height          =   270
       Left            =   5880
-      TabIndex        =   5
+      TabIndex        =   4
       Text            =   "X"
       Top             =   840
       Width           =   495
@@ -177,7 +185,7 @@ Begin VB.Form frmMain
    Begin VB.TextBox txtNum 
       Height          =   270
       Left            =   3840
-      TabIndex        =   4
+      TabIndex        =   3
       Text            =   "Num"
       Top             =   840
       Width           =   495
@@ -185,7 +193,7 @@ Begin VB.Form frmMain
    Begin VB.ComboBox cbbfontNO 
       Height          =   300
       Left            =   5040
-      TabIndex        =   3
+      TabIndex        =   7
       Text            =   "请选择字体编号"
       Top             =   1200
       Width           =   3015
@@ -342,51 +350,55 @@ Begin VB.Form frmMain
       Caption         =   "中文"
       Height          =   255
       Left            =   120
-      TabIndex        =   38
+      TabIndex        =   21
       Top             =   4440
       Width           =   735
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
+      Caption         =   "00"
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   5
       Left            =   7680
-      TabIndex        =   17
+      TabIndex        =   14
       Top             =   2040
       Width           =   375
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
+      Caption         =   "00"
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   4
       Left            =   6360
-      TabIndex        =   16
+      TabIndex        =   13
       Top             =   2040
       Width           =   375
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
+      Caption         =   "00"
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   3
       Left            =   5040
-      TabIndex        =   15
+      TabIndex        =   12
       Top             =   2040
       Width           =   375
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
+      Caption         =   "00"
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   2
       Left            =   3720
-      TabIndex        =   14
+      TabIndex        =   11
       Top             =   2040
       Width           =   375
    End
@@ -395,7 +407,7 @@ Begin VB.Form frmMain
       Height          =   255
       Index           =   13
       Left            =   6960
-      TabIndex        =   35
+      TabIndex        =   37
       Top             =   2160
       Width           =   735
    End
@@ -404,7 +416,7 @@ Begin VB.Form frmMain
       Height          =   255
       Index           =   12
       Left            =   5640
-      TabIndex        =   34
+      TabIndex        =   36
       Top             =   2160
       Width           =   735
    End
@@ -413,7 +425,7 @@ Begin VB.Form frmMain
       Height          =   255
       Index           =   11
       Left            =   4320
-      TabIndex        =   33
+      TabIndex        =   35
       Top             =   2160
       Width           =   735
    End
@@ -422,7 +434,7 @@ Begin VB.Form frmMain
       Height          =   255
       Index           =   10
       Left            =   3000
-      TabIndex        =   32
+      TabIndex        =   34
       Top             =   2160
       Width           =   735
    End
@@ -431,7 +443,7 @@ Begin VB.Form frmMain
       Height          =   255
       Index           =   9
       Left            =   6000
-      TabIndex        =   31
+      TabIndex        =   33
       Top             =   1680
       Width           =   855
    End
@@ -440,7 +452,7 @@ Begin VB.Form frmMain
       Height          =   255
       Index           =   8
       Left            =   4440
-      TabIndex        =   30
+      TabIndex        =   32
       Top             =   1680
       Width           =   975
    End
@@ -448,40 +460,43 @@ Begin VB.Form frmMain
       Caption         =   "图片Y坐标"
       Height          =   255
       Left            =   3000
-      TabIndex        =   28
+      TabIndex        =   31
       Top             =   1200
       Width           =   855
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
+      Caption         =   "00"
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   6
       Left            =   6960
-      TabIndex        =   18
+      TabIndex        =   10
       Top             =   1560
       Width           =   375
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
+      Caption         =   "00"
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   1
       Left            =   5520
-      TabIndex        =   13
+      TabIndex        =   9
       Top             =   1560
       Width           =   375
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000014&
+      Caption         =   "00"
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   0
       Left            =   3960
-      TabIndex        =   12
+      TabIndex        =   8
       Top             =   1560
       Width           =   375
    End
@@ -489,7 +504,7 @@ Begin VB.Form frmMain
       Caption         =   "高度"
       Height          =   255
       Left            =   6720
-      TabIndex        =   10
+      TabIndex        =   27
       Top             =   840
       Width           =   495
    End
@@ -497,7 +512,7 @@ Begin VB.Form frmMain
       Caption         =   "宽度"
       Height          =   255
       Left            =   5040
-      TabIndex        =   9
+      TabIndex        =   26
       Top             =   840
       Width           =   495
    End
@@ -505,7 +520,7 @@ Begin VB.Form frmMain
       Caption         =   "显示数目"
       Height          =   255
       Left            =   3000
-      TabIndex        =   8
+      TabIndex        =   25
       Top             =   840
       Width           =   855
    End
@@ -513,7 +528,7 @@ Begin VB.Form frmMain
       Caption         =   "GBK补丁地址"
       Height          =   255
       Left            =   5040
-      TabIndex        =   7
+      TabIndex        =   24
       Top             =   360
       Width           =   1095
    End
@@ -521,7 +536,7 @@ Begin VB.Form frmMain
       Caption         =   "启动代码"
       Height          =   255
       Left            =   3000
-      TabIndex        =   6
+      TabIndex        =   23
       Top             =   360
       Width           =   855
    End
@@ -530,7 +545,7 @@ Begin VB.Form frmMain
       Height          =   255
       Index           =   7
       Left            =   3000
-      TabIndex        =   19
+      TabIndex        =   28
       Top             =   1680
       Width           =   855
    End
@@ -622,6 +637,9 @@ Private Sub Form_Load()
     apply_Picture
     picIcons.Visible = False
     frmMain.Wallpaper.ZOrder 0
+    txtT.Tag = "00"
+    Frame1.Enabled = False
+    cmdRes.Enabled = False
     
     cbbfontNO.AddItem GetINI("lng", "cbbfontNO00", App.Path & "\Config.ini")
     cbbfontNO.AddItem GetINI("lng", "cbbfontNO01", App.Path & "\Config.ini")
@@ -654,6 +672,12 @@ Private Sub Form_Load()
         frmMain.mEditPath(i).Caption = j(i)
     Next
 End Sub
+
+
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    txtT.Visible = False
+End Sub
+
 Private Sub Form_Unload(Cancel As Integer)
     End
 End Sub
@@ -676,7 +700,8 @@ Private Sub mNew_Click()
         fs.DeleteFolder Replace(App.Path & "\Temp", "\\", "\"), False
         Set f = fs.GetFolder(Replace(App.Path & "\Default\icons\", "\\", "\"))
         f.Copy (Replace(App.Path & "\Temp", "\\", "\"))
-    If Open3(Replace(App.Path & "\Default\", "\\", "\"), "") = False Then Exit Sub
+    If Open3(Replace(App.Path & "\Default\", "\\", "\"), "") = False Then Frame1.Enabled = False: Exit Sub
+    Frame1.Enabled = True: cmdRes.Enabled = True
     SavePath = ""
 End Sub
 Private Sub mOpen_Click()
@@ -687,8 +712,9 @@ Private Sub mOpen_Click()
     If CommonDialog1.FileName = "" Or Err.Number = 32755 Then Exit Sub
     Dim qwe As Variant
     qwe = Split(CommonDialog1.FileTitle, ".")
-    If Open3(Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle)), CStr(qwe(0))) = False Then: Exit Sub
+    If Open3(Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle)), CStr(qwe(0))) = False Then: Frame1.Enabled = False: Exit Sub
 
+    Frame1.Enabled = True: cmdRes.Enabled = True
     SaveName = qwe(0)
     SavePath = Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle))
 End Sub
@@ -714,22 +740,25 @@ Private Sub maSave_Click()
         i = IIf(SavePath = "", "\Temp", "\icons")
     '重命名图标目录
     If Len(Dir(Replace(SavePath & "\icons\", "\\", "\"))) <> 0 Then fs.DeleteFolder Replace(SavePath & "\icons", "\\", "\"), False
-    Name Replace(SavePath & i, "\\", "\") As Replace(SavePath & "\icons", "\\", "\")
+    Name Replace(Mid(CommonDialog1.FileName, 1, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle)) & i, "\\", "\") As Replace(Mid(CommonDialog1.FileName, 1, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle)) & "\icons", "\\", "\")
+    If Len(Dir(Replace(SavePath & "\icons\", "\\", "\"))) = 0 Then Exit Sub
+    
     element(0).image = Replace(SavePath & "\icons\", "\\", "\")
-
     SaveName = qwe(0)
     SavePath = Left(CommonDialog1.FileName, Len(CommonDialog1.FileName) - Len(CommonDialog1.FileTitle))
     MsgBox GetINI("lng", "SaveOK_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "title_MG", App.Path & "\Config.ini")
 End Sub
 Private Sub mExit_Click()
     If MsgBox(GetINI("lng", "mExit_SavePrompt_MG", App.Path & "\Config.ini"), _
-    vbOKCancel, GetINI("lng", "title_MG", App.Path & "\Config.ini")) = 1 Then _
-    Call mSave_Click
+    vbOKCancel, GetINI("lng", "title_MG", App.Path & "\Config.ini")) = 1 Then Call mSave_Click
+    End
 End Sub
 Private Sub mSet_Click()
+    frmMain.Enabled = False
     frmSetting.Show
 End Sub
 Private Sub mAbout_Click()
+    frmMain.Enabled = False
     frmAbout.Show
 End Sub
 
@@ -829,10 +858,10 @@ End Sub
 
 '限制输入
 Private Sub txtNum_KeyPress(KeyAscii As Integer)
-If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0
-If KeyAscii = 8 Then Exit Sub
+If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0 '数字限制
+'If KeyAscii = 8 Then Exit Sub
+'If CInt(Mid(txtY.Text, 1, txtY.SelStart) & Chr(KeyAscii) & Mid(txtT.Text, txtT.SelStart + txtT.SelLength + 1)) > 10 Then KeyAscii = 0 '数字大小限制
 End Sub
-
 Private Sub txtStart_KeyPress(KeyAscii As Integer)
 If (KeyAscii < 48 Or (KeyAscii > 57 And KeyAscii < 65) Or (KeyAscii > 70 And KeyAscii < 97) Or KeyAscii > 102) And KeyAscii <> 120 And KeyAscii <> 88 And KeyAscii <> 8 Then KeyAscii = 0 '限制除数字、ABCDEFabcdef输入、Xx
 If (KeyAscii = 88 Or KeyAscii = 120) And txtOffset.SelStart <> 1 Then KeyAscii = 0
@@ -842,26 +871,32 @@ If (KeyAscii < 48 Or (KeyAscii > 57 And KeyAscii < 65) Or (KeyAscii > 70 And Key
 If txtOffset.SelStart < 2 Or (txtOffset.SelStart = 2 And txtOffset.SelLength = 0 And KeyAscii = 8) Then KeyAscii = 0
 End Sub
 Private Sub txtX_KeyPress(KeyAscii As Integer)
-If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0
+If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0 '数字限制
 If KeyAscii = 8 Then Exit Sub
-If CInt(Mid(txtX.Text, 1, txtX.SelStart) & Chr(KeyAscii) & Mid(txtX.Text, txtX.SelStart + 1)) > 176 Then KeyAscii = 0
+If CInt(Mid(txtX.Text, 1, txtX.SelStart) & Chr(KeyAscii) & Mid(txtT.Text, txtT.SelStart + txtT.SelLength + 1)) > 176 Then KeyAscii = 0 '数字大小限制
 End Sub
 Private Sub txtY_KeyPress(KeyAscii As Integer)
-If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0
+If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0 '数字限制
 If KeyAscii = 8 Then Exit Sub
-If CInt(Mid(txtY.Text, 1, txtY.SelStart) & Chr(KeyAscii) & Mid(txtY.Text, txtY.SelStart + 1)) > 220 Then KeyAscii = 0
+If CInt(Mid(txtY.Text, 1, txtY.SelStart) & Chr(KeyAscii) & Mid(txtT.Text, txtT.SelStart + txtT.SelLength + 1)) > 220 Then KeyAscii = 0 '数字大小限制
 End Sub
 Private Sub txtPath_KeyPress(KeyAscii As Integer)
-If Path_code(0).Value = True Then
+If Path_code(0).Value = True Then '代码
     If (KeyAscii < 48 Or (KeyAscii > 57 And KeyAscii < 65) Or (KeyAscii > 70 And KeyAscii < 97) Or KeyAscii > 102) And KeyAscii <> 8 Then KeyAscii = 0 '限制除数字、ABCDEFabcdef输入
     If txtPath.SelStart < 2 Or (txtPath.SelStart = 2 And txtPath.SelLength = 0 And KeyAscii = 8) Then KeyAscii = 0 '限制当框里小于2个时
-Else
-    If txtPath.SelStart < 1 Or (txtPath.SelStart = 1 And txtPath.SelLength = 0 And KeyAscii = 8) Then KeyAscii = 0 '限制当框里小于2个时
+Else '路径
+    'If txtPath.SelStart < 1 And KeyAscii <> 33 Or (txtPath.SelStart = 1 And txtPath.SelLength = 0 And KeyAscii = 8) Then KeyAscii = 0 '限制当框里小于2个时
 End If
 End Sub
 Private Sub txtName_KeyPress(KeyAscii As Integer)
-    If txtName.SelStart = 0 And KeyAscii > 47 And KeyAscii < 58 Then KeyAscii = 0
+    If txtName.SelStart = 0 And KeyAscii > 47 And KeyAscii < 58 Then KeyAscii = 0 '第一个字符不能是数字
 End Sub
+Private Sub txtT_KeyPress(KeyAscii As Integer)
+    If (KeyAscii < 48 Or KeyAscii > 57) And KeyAscii <> 8 Then KeyAscii = 0 '数字限制
+    If KeyAscii = 8 Then Exit Sub
+    If CInt(Mid(txtT.Text, 1, txtT.SelStart) & Chr(KeyAscii) & Mid(txtT.Text, txtT.SelStart + txtT.SelLength + 1)) > 256 Then KeyAscii = 0 '数字大小限制
+End Sub
+
 
 '****************************************************************
 
@@ -874,11 +909,20 @@ Private Sub TreeView1_AfterLabelEdit(Cancel As Integer, NewString As String)
     Call iPrint(element(nownum).name, False, True) '刷新图标
 End Sub
 Private Sub LblColor_Click(Index As Integer)
-    On Error Resume Next
-    CommonDialog1.ShowColor
-    If Err.Number = 32755 Then Exit Sub
-    lblColor(Index).BackColor = CommonDialog1.Color
-    Call iPrint(element(nownum).name, True, True) '刷新边框图标
+    If Index > 6 Then Exit Sub
+    If iButton(0) = 2 Then
+        txtT.Left = iButton(1) + lblColor(Index).Left
+        txtT.Top = iButton(2) + lblColor(Index).Top
+        txtT.Visible = True
+        txtT.SetFocus '得到光标
+    Else
+        On Error Resume Next
+        CommonDialog1.ShowColor
+        If Err.Number = 32755 Then Exit Sub
+        lblColor(Index).BackColor = CommonDialog1.Color
+        lblColor(Index).ForeColor = 16777215 - CommonDialog1.Color '反色显示
+        Call iPrint(element(nownum).name, True, True) '刷新边框图标
+    End If
 End Sub
 Private Sub txtName_Change()
     If element(nownum).name = txtName.Text Then Exit Sub
@@ -890,29 +934,29 @@ End Sub
 Private Sub Path_code_Click(Index As Integer)
     If Index = IIf(Left(element(nownum).Path_code, 2) = "0x", 0, 1) Then Exit Sub '如果选择的相同，则退出
     If Index = 0 Then
-        txtPath.Text = "0x"
+        txtPath.Text = "0x0"
     Else
         txtPath.Text = "/b/ELF/"
     End If
 End Sub
 Private Sub txtPath_Change()
     If element(nownum).Path_code = txtPath.Text Then Exit Sub
-    element(nownum).Path_code = txtPath.Text
+    element(nownum).Path_code = IIf(txtPath.Text = "0x", "0x0", txtPath.Text)
 End Sub
 
 Private Sub LblBg_P_Click()
-txtPict.Tag = IIf(txtPict.Enabled, txtPict.Text, txtPict.Tag) '如果要关闭，将数值存入TAG
-txtPict.Text = IIf(txtPict.Enabled, 0, txtPict.Tag) '如果要关闭，将0写入TXT
-txtPict.Enabled = IIf(txtPict.Enabled, False, True) '变更
+    txtPict.Tag = IIf(txtPict.Enabled, txtPict.Text, txtPict.Tag) '如果要关闭，将数值存入TAG
+    txtPict.Text = IIf(txtPict.Enabled, 0, txtPict.Tag) '如果要关闭，将0写入TXT
+    txtPict.Enabled = IIf(txtPict.Enabled, False, True) '变更
 End Sub
 Private Sub LblEorC_Click()
-If txtPict.Enabled = linzi Then LblBg_P_Click
-LblGBKMAP.Visible = IIf(linzi, False, True)
-txtOffset.Visible = IIf(linzi, False, True)
-LblBg_P.Visible = IIf(linzi, False, True)
-txtPict.Visible = IIf(linzi, False, True)
-LblEorC.Caption = GetINI("lng", IIf(linzi, "LblEorC-E", "LblEorC-C"), App.Path & "\Config.ini")
-linzi = IIf(linzi, False, True)
+    If txtPict.Enabled = linzi Then LblBg_P_Click
+    LblGBKMAP.Visible = IIf(linzi, False, True)
+    txtOffset.Visible = IIf(linzi, False, True)
+    LblBg_P.Visible = IIf(linzi, False, True)
+    txtPict.Visible = IIf(linzi, False, True)
+    LblEorC.Caption = GetINI("lng", IIf(linzi, "LblEorC-E", "LblEorC-C"), App.Path & "\Config.ini")
+    linzi = IIf(linzi, False, True)
 End Sub
 
 '根据字符串长度扩大TXTBOX框
@@ -928,6 +972,25 @@ Private Sub Frame1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
     picIcons.Visible = False
 End Sub
 
+
+'****************************************************************
+
+'颜色透明度
+Private Sub lblColor_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Index > 6 Then Exit Sub
+    If Button = 2 Then '标示为右键
+        iButton(0) = 2: iButton(1) = X: iButton(2) = Y '记录XY坐标
+        txtT.Tag = Index '记录对应Index
+        txtT.Text = CInt("&H" & lblColor(Index).Caption) '显示为16进制
+    ElseIf Button = 1 Then
+        iButton(0) = 1 '标示为左键
+    End If
+End Sub
+
+Private Sub txtT_Change()
+    If txtT.Text <> "" Then lblColor(txtT.Tag).Caption = Hex(txtT.Text)
+    If Len(lblColor(txtT.Tag).Caption) = 1 Then lblColor(txtT.Tag).Caption = "0" & lblColor(txtT.Tag).Caption
+End Sub
 
 '****************************************************************
 
@@ -968,8 +1031,20 @@ If Not (TreeView1.HitTest(X, Y) Is Nothing) Then
     lastnum = nownum '上一个
     nownum = Get_Index(TreeView1.HitTest(X, Y).Key) '取得数组编号
     txtName.Text = element(nownum).name
-    Path_code(IIf(Len(element(nownum).Path_code) > 5, 1, 0)).Value = 1
-    txtPath.Text = element(nownum).Path_code
+    If TreeView1.HitTest(X, Y).Children = 0 Then '有无子集
+        Path_code(IIf(Len(element(nownum).Path_code) > 5, 1, 0)).Value = 1
+        txtPath.Text = element(nownum).Path_code
+        Path_code(0).Enabled = True
+        Path_code(1).Enabled = True
+        txtPath.Enabled = True
+    Else
+        element(nownum).TF = True '有子集
+        Path_code(0).Value = True
+        txtPath.Text = "0" '修改element(nownum).Path_code
+        Path_code(0).Enabled = False
+        Path_code(1).Enabled = False
+        txtPath.Enabled = False
+    End If
     imgIcons.Picture = LoadPicture(element(0).image & element(nownum).image)
 End If
 End Sub

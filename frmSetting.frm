@@ -1,20 +1,24 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmSetting 
+   BorderStyle     =   3  'Fixed Dialog
    Caption         =   "设置"
    ClientHeight    =   4095
-   ClientLeft      =   4185
-   ClientTop       =   3330
+   ClientLeft      =   4560
+   ClientTop       =   4125
    ClientWidth     =   6870
    LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
    ScaleHeight     =   4095
    ScaleWidth      =   6870
+   ShowInTaskbar   =   0   'False
    Begin VB.CommandButton cmdapply 
       Caption         =   "应用"
       Enabled         =   0   'False
       Height          =   375
       Left            =   5640
-      TabIndex        =   4
+      TabIndex        =   8
       Top             =   3480
       Width           =   975
    End
@@ -22,7 +26,7 @@ Begin VB.Form frmSetting
       Caption         =   "保存"
       Height          =   375
       Left            =   4320
-      TabIndex        =   3
+      TabIndex        =   7
       Top             =   3480
       Width           =   975
    End
@@ -38,7 +42,7 @@ Begin VB.Form frmSetting
       Caption         =   "图片目录"
       Height          =   2775
       Left            =   240
-      TabIndex        =   6
+      TabIndex        =   9
       Top             =   600
       Width           =   6375
       Begin VB.TextBox txtIcon 
@@ -49,7 +53,8 @@ Begin VB.Form frmSetting
          Left            =   1680
          Locked          =   -1  'True
          MousePointer    =   1  'Arrow
-         TabIndex        =   11
+         TabIndex        =   6
+         TabStop         =   0   'False
          Top             =   2160
          Width           =   4455
       End
@@ -61,7 +66,8 @@ Begin VB.Form frmSetting
          Left            =   1680
          Locked          =   -1  'True
          MousePointer    =   1  'Arrow
-         TabIndex        =   10
+         TabIndex        =   4
+         TabStop         =   0   'False
          Top             =   1320
          Width           =   4455
       End
@@ -69,7 +75,7 @@ Begin VB.Form frmSetting
          Caption         =   "状态栏目录"
          Height          =   495
          Left            =   240
-         TabIndex        =   9
+         TabIndex        =   5
          Top             =   2040
          Width           =   1215
       End
@@ -78,7 +84,7 @@ Begin VB.Form frmSetting
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   5
+         TabIndex        =   1
          Top             =   360
          Width           =   735
       End
@@ -87,7 +93,7 @@ Begin VB.Form frmSetting
          Height          =   255
          Index           =   1
          Left            =   240
-         TabIndex        =   1
+         TabIndex        =   2
          Top             =   840
          Width           =   1095
       End
@@ -95,7 +101,7 @@ Begin VB.Form frmSetting
          Caption         =   "背景图片"
          Height          =   495
          Left            =   240
-         TabIndex        =   2
+         TabIndex        =   3
          Top             =   1200
          Width           =   1215
       End
@@ -112,7 +118,7 @@ Begin VB.Form frmSetting
          Caption         =   "程序目录\icon\"
          Height          =   255
          Left            =   1680
-         TabIndex        =   8
+         TabIndex        =   11
          Top             =   360
          Width           =   4455
       End
@@ -120,7 +126,7 @@ Begin VB.Form frmSetting
          Caption         =   "必须同时指定背景图片和图标目录"
          Height          =   255
          Left            =   1680
-         TabIndex        =   7
+         TabIndex        =   10
          Top             =   840
          Width           =   4455
       End
@@ -158,6 +164,10 @@ Else
     cmdWallpaper.Enabled = False
     cmdIcon.Enabled = False
 End If
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    frmMain.Enabled = True
 End Sub
 
 Private Sub optPictureSuff_Other_Click(Index As Integer)
