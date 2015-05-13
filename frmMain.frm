@@ -5,7 +5,7 @@ Begin VB.Form frmMain
    BorderStyle     =   0  'None
    Caption         =   "Start_Menu 编辑器"
    ClientHeight    =   5310
-   ClientLeft      =   3405
+   ClientLeft      =   3390
    ClientTop       =   3165
    ClientWidth     =   8310
    LinkTopic       =   "Form1"
@@ -13,6 +13,30 @@ Begin VB.Form frmMain
    ScaleHeight     =   5310
    ScaleWidth      =   8310
    ShowInTaskbar   =   0   'False
+   Begin VB.TextBox txtPict 
+      Height          =   270
+      Left            =   3960
+      TabIndex        =   6
+      Text            =   "PY"
+      Top             =   1200
+      Width           =   495
+   End
+   Begin VB.TextBox txtNum 
+      Height          =   270
+      Left            =   3960
+      TabIndex        =   3
+      Text            =   "Num"
+      Top             =   840
+      Width           =   495
+   End
+   Begin VB.TextBox txtOffset 
+      Height          =   270
+      Left            =   6480
+      TabIndex        =   2
+      Text            =   "offset"
+      Top             =   360
+      Width           =   1695
+   End
    Begin VB.TextBox txtT 
       Appearance      =   0  'Flat
       Height          =   270
@@ -40,30 +64,22 @@ Begin VB.Form frmMain
    Begin VB.CommandButton cmdRes 
       Caption         =   "刷新"
       Height          =   495
-      Left            =   960
+      Left            =   1560
       TabIndex        =   20
       Top             =   4200
       Width           =   855
    End
-   Begin VB.TextBox txtPict 
-      Height          =   270
-      Left            =   3840
-      TabIndex        =   6
-      Text            =   "PY"
-      Top             =   1200
-      Width           =   495
-   End
    Begin MSComDlg.CommonDialog CommonDialog1 
-      Left            =   1800
-      Top             =   4200
+      Left            =   720
+      Top             =   3840
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
       CancelError     =   -1  'True
    End
    Begin MSComctlLib.ImageList ImageList1 
-      Left            =   2280
-      Top             =   4200
+      Left            =   120
+      Top             =   3720
       _ExtentX        =   1005
       _ExtentY        =   1005
       BackColor       =   -2147483643
@@ -76,10 +92,10 @@ Begin VB.Form frmMain
    Begin VB.Frame Frame1 
       Caption         =   "元素"
       Height          =   2415
-      Left            =   3000
+      Left            =   2880
       TabIndex        =   29
       Top             =   2520
-      Width           =   5055
+      Width           =   5295
       Begin VB.PictureBox picIcons 
          Appearance      =   0  'Flat
          BackColor       =   &H80000005&
@@ -100,47 +116,47 @@ Begin VB.Form frmMain
             Width           =   375
          End
       End
-      Begin VB.TextBox txtPath 
-         Height          =   375
-         Left            =   2640
-         TabIndex        =   19
-         Text            =   "path"
-         Top             =   1680
-         Width           =   2295
-      End
       Begin VB.OptionButton Path_code 
          Caption         =   "程序"
          Height          =   255
          Index           =   1
-         Left            =   3480
+         Left            =   4200
          TabIndex        =   18
          Top             =   1320
-         Width           =   735
+         Width           =   975
+      End
+      Begin VB.TextBox txtPath 
+         Height          =   375
+         Left            =   2760
+         TabIndex        =   19
+         Text            =   "path"
+         Top             =   1680
+         Width           =   2415
       End
       Begin VB.OptionButton Path_code 
          Caption         =   "代码"
          Height          =   255
          Index           =   0
-         Left            =   2640
+         Left            =   2760
          TabIndex        =   17
          Top             =   1320
-         Width           =   735
+         Width           =   1455
       End
       Begin VB.TextBox txtName 
          Height          =   375
-         Left            =   2640
+         Left            =   2760
          TabIndex        =   16
          Text            =   "name"
          Top             =   720
-         Width           =   2295
+         Width           =   2415
       End
       Begin MSComctlLib.TreeView TreeView1 
          Height          =   2055
          Left            =   120
          TabIndex        =   15
          Top             =   240
-         Width           =   2415
-         _ExtentX        =   4260
+         Width           =   2535
+         _ExtentX        =   4471
          _ExtentY        =   3625
          _Version        =   393217
          Indentation     =   9
@@ -153,22 +169,22 @@ Begin VB.Form frmMain
       End
       Begin VB.Image imgIcons 
          Height          =   375
-         Left            =   2640
+         Left            =   2760
          Top             =   240
          Width           =   375
       End
       Begin VB.Label LblName 
          Caption         =   "名称"
          Height          =   255
-         Left            =   3120
+         Left            =   3240
          TabIndex        =   30
          Top             =   360
-         Width           =   495
+         Width           =   735
       End
    End
    Begin VB.TextBox txtY 
       Height          =   270
-      Left            =   7560
+      Left            =   7680
       TabIndex        =   5
       Text            =   "Y"
       Top             =   840
@@ -182,33 +198,17 @@ Begin VB.Form frmMain
       Top             =   840
       Width           =   495
    End
-   Begin VB.TextBox txtNum 
-      Height          =   270
-      Left            =   3840
-      TabIndex        =   3
-      Text            =   "Num"
-      Top             =   840
-      Width           =   495
-   End
    Begin VB.ComboBox cbbfontNO 
       Height          =   300
       Left            =   5040
       TabIndex        =   7
       Text            =   "请选择字体编号"
       Top             =   1200
-      Width           =   3015
-   End
-   Begin VB.TextBox txtOffset 
-      Height          =   270
-      Left            =   6360
-      TabIndex        =   2
-      Text            =   "offset"
-      Top             =   360
-      Width           =   1695
+      Width           =   3135
    End
    Begin VB.TextBox txtStart 
       Height          =   270
-      Left            =   3840
+      Left            =   3960
       TabIndex        =   1
       Text            =   "code"
       Top             =   360
@@ -346,124 +346,6 @@ Begin VB.Form frmMain
          Width           =   330
       End
    End
-   Begin VB.Label LblEorC 
-      Caption         =   "中文"
-      Height          =   255
-      Left            =   120
-      TabIndex        =   21
-      Top             =   4440
-      Width           =   735
-   End
-   Begin VB.Label lblColor 
-      Appearance      =   0  'Flat
-      BackColor       =   &H80000005&
-      Caption         =   "00"
-      ForeColor       =   &H80000008&
-      Height          =   375
-      Index           =   5
-      Left            =   7680
-      TabIndex        =   14
-      Top             =   2040
-      Width           =   375
-   End
-   Begin VB.Label lblColor 
-      Appearance      =   0  'Flat
-      BackColor       =   &H80000005&
-      Caption         =   "00"
-      ForeColor       =   &H80000008&
-      Height          =   375
-      Index           =   4
-      Left            =   6360
-      TabIndex        =   13
-      Top             =   2040
-      Width           =   375
-   End
-   Begin VB.Label lblColor 
-      Appearance      =   0  'Flat
-      BackColor       =   &H80000005&
-      Caption         =   "00"
-      ForeColor       =   &H80000008&
-      Height          =   375
-      Index           =   3
-      Left            =   5040
-      TabIndex        =   12
-      Top             =   2040
-      Width           =   375
-   End
-   Begin VB.Label lblColor 
-      Appearance      =   0  'Flat
-      BackColor       =   &H80000005&
-      Caption         =   "00"
-      ForeColor       =   &H80000008&
-      Height          =   375
-      Index           =   2
-      Left            =   3720
-      TabIndex        =   11
-      Top             =   2040
-      Width           =   375
-   End
-   Begin VB.Label lblColor 
-      Caption         =   "边框4"
-      Height          =   255
-      Index           =   13
-      Left            =   6960
-      TabIndex        =   37
-      Top             =   2160
-      Width           =   735
-   End
-   Begin VB.Label lblColor 
-      Caption         =   "边框3"
-      Height          =   255
-      Index           =   12
-      Left            =   5640
-      TabIndex        =   36
-      Top             =   2160
-      Width           =   735
-   End
-   Begin VB.Label lblColor 
-      Caption         =   "边框2"
-      Height          =   255
-      Index           =   11
-      Left            =   4320
-      TabIndex        =   35
-      Top             =   2160
-      Width           =   735
-   End
-   Begin VB.Label lblColor 
-      Caption         =   "边框1"
-      Height          =   255
-      Index           =   10
-      Left            =   3000
-      TabIndex        =   34
-      Top             =   2160
-      Width           =   735
-   End
-   Begin VB.Label lblColor 
-      Caption         =   "光标颜色"
-      Height          =   255
-      Index           =   9
-      Left            =   6000
-      TabIndex        =   33
-      Top             =   1680
-      Width           =   855
-   End
-   Begin VB.Label lblColor 
-      Caption         =   "文字颜色"
-      Height          =   255
-      Index           =   8
-      Left            =   4440
-      TabIndex        =   32
-      Top             =   1680
-      Width           =   975
-   End
-   Begin VB.Label LblBg_P 
-      Caption         =   "图片Y坐标"
-      Height          =   255
-      Left            =   3000
-      TabIndex        =   31
-      Top             =   1200
-      Width           =   855
-   End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
@@ -471,7 +353,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   6
-      Left            =   6960
+      Left            =   6360
       TabIndex        =   10
       Top             =   1560
       Width           =   375
@@ -483,10 +365,136 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   1
-      Left            =   5520
+      Left            =   4800
       TabIndex        =   9
       Top             =   1560
       Width           =   375
+   End
+   Begin VB.Label lblColor 
+      Caption         =   "边框2"
+      Height          =   255
+      Index           =   11
+      Left            =   4600
+      TabIndex        =   35
+      Top             =   2160
+      Width           =   915
+   End
+   Begin VB.Label LblRegister 
+      Caption         =   "启动代码"
+      Height          =   255
+      Left            =   2880
+      TabIndex        =   23
+      Top             =   360
+      Width           =   975
+   End
+   Begin VB.Label LblEorC 
+      Caption         =   "Chinese"
+      Height          =   255
+      Left            =   240
+      TabIndex        =   21
+      Top             =   4440
+      Width           =   1215
+   End
+   Begin VB.Label lblColor 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
+      Caption         =   "00"
+      ForeColor       =   &H80000008&
+      Height          =   375
+      Index           =   5
+      Left            =   6840
+      TabIndex        =   14
+      Top             =   2040
+      Width           =   375
+   End
+   Begin VB.Label lblColor 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
+      Caption         =   "00"
+      ForeColor       =   &H80000008&
+      Height          =   375
+      Index           =   4
+      Left            =   5520
+      TabIndex        =   13
+      Top             =   2040
+      Width           =   375
+   End
+   Begin VB.Label lblColor 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
+      Caption         =   "00"
+      ForeColor       =   &H80000008&
+      Height          =   375
+      Index           =   3
+      Left            =   4200
+      TabIndex        =   12
+      Top             =   2040
+      Width           =   375
+   End
+   Begin VB.Label lblColor 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000005&
+      Caption         =   "00"
+      ForeColor       =   &H80000008&
+      Height          =   375
+      Index           =   2
+      Left            =   2880
+      TabIndex        =   11
+      Top             =   2040
+      Width           =   375
+   End
+   Begin VB.Label lblColor 
+      Caption         =   "边框4"
+      Height          =   255
+      Index           =   13
+      Left            =   7240
+      TabIndex        =   37
+      Top             =   2160
+      Width           =   915
+   End
+   Begin VB.Label lblColor 
+      Caption         =   "边框3"
+      Height          =   255
+      Index           =   12
+      Left            =   5920
+      TabIndex        =   36
+      Top             =   2160
+      Width           =   915
+   End
+   Begin VB.Label lblColor 
+      Caption         =   "边框1"
+      Height          =   255
+      Index           =   10
+      Left            =   3280
+      TabIndex        =   34
+      Top             =   2160
+      Width           =   915
+   End
+   Begin VB.Label lblColor 
+      Caption         =   "光标颜色"
+      Height          =   255
+      Index           =   9
+      Left            =   6840
+      TabIndex        =   33
+      Top             =   1680
+      Width           =   975
+   End
+   Begin VB.Label lblColor 
+      Caption         =   "文字颜色"
+      Height          =   255
+      Index           =   8
+      Left            =   5280
+      TabIndex        =   32
+      Top             =   1680
+      Width           =   855
+   End
+   Begin VB.Label LblBg_P 
+      Caption         =   "图片Y坐标"
+      Height          =   255
+      Left            =   2880
+      TabIndex        =   31
+      Top             =   1200
+      Width           =   975
    End
    Begin VB.Label lblColor 
       Appearance      =   0  'Flat
@@ -495,7 +503,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   375
       Index           =   0
-      Left            =   3960
+      Left            =   2880
       TabIndex        =   8
       Top             =   1560
       Width           =   375
@@ -503,10 +511,10 @@ Begin VB.Form frmMain
    Begin VB.Label lblH 
       Caption         =   "高度"
       Height          =   255
-      Left            =   6720
+      Left            =   6840
       TabIndex        =   27
       Top             =   840
-      Width           =   495
+      Width           =   615
    End
    Begin VB.Label lblW 
       Caption         =   "宽度"
@@ -514,15 +522,15 @@ Begin VB.Form frmMain
       Left            =   5040
       TabIndex        =   26
       Top             =   840
-      Width           =   495
+      Width           =   615
    End
    Begin VB.Label lblNum 
       Caption         =   "显示数目"
       Height          =   255
-      Left            =   3000
+      Left            =   2880
       TabIndex        =   25
       Top             =   840
-      Width           =   855
+      Width           =   975
    End
    Begin VB.Label LblGBKMAP 
       Caption         =   "GBK补丁地址"
@@ -530,24 +538,16 @@ Begin VB.Form frmMain
       Left            =   5040
       TabIndex        =   24
       Top             =   360
-      Width           =   1095
-   End
-   Begin VB.Label LblRegister 
-      Caption         =   "启动代码"
-      Height          =   255
-      Left            =   3000
-      TabIndex        =   23
-      Top             =   360
-      Width           =   855
+      Width           =   1335
    End
    Begin VB.Label lblColor 
       Caption         =   "背景颜色"
       Height          =   255
       Index           =   7
-      Left            =   3000
+      Left            =   3360
       TabIndex        =   28
       Top             =   1680
-      Width           =   855
+      Width           =   1335
    End
    Begin VB.Menu mFile 
       Caption         =   "文件(&F)"
@@ -786,7 +786,7 @@ Private Sub mdele_Click() '删除
     element(nownum).Path_code = element(UBound(element)).Path_code
     element(nownum).TF = element(UBound(element)).TF
     ReDim Preserve element(UBound(element) - 1) As one_element
-    Call iPrint(TreeView1.SelectedItem, False, True)
+    nownum = 1
 End Sub
  '添加
 Private Sub mFront_Click() '前面
@@ -799,6 +799,20 @@ Private Sub mSub_Click() '子集
     mAddSub (4)
 End Sub
 Private Sub mAddSub(ty As Byte)  '添加(类型)
+'添加限制，不得超过“显示数目”
+    If ty <> 4 Then '限制添加同级
+        Do Until frmMain.TreeView1.Nodes(nownum).Previous Is Nothing
+            nownum = Get_Index(frmMain.TreeView1.Nodes(nownum).Previous)
+        Loop
+        Dim mun As Byte
+        Do Until frmMain.TreeView1.Nodes(nownum).Next Is Nothing
+            nownum = Get_Index(frmMain.TreeView1.Nodes(nownum).Next)
+            mun = mun + 1
+        Loop
+        If mun + 1 >= CInt(txtNum.Text) Then MsgBox GetINI("lng", "AddElement_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini"): Exit Sub
+    Else '限制添加子级
+        If frmMain.TreeView1.Nodes(nownum).Children >= CInt(txtNum.Text) Then MsgBox GetINI("lng", "AddElement_MG", App.Path & "\Config.ini"), 1, GetINI("lng", "warn_MG", App.Path & "\Config.ini"): Exit Sub
+    End If
     TreeView1.Nodes.Add TreeView1.SelectedItem, ty, "key", "name", 1
 ReDim Preserve element(UBound(element) + 1)
     nownum = UBound(element)
@@ -967,8 +981,8 @@ Private Sub txtPath_MouseMove(Button As Integer, Shift As Integer, X As Single, 
     txtPath.Width = 4817
 End Sub
 Private Sub Frame1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    txtPath.Left = 2640
-    txtPath.Width = 2295
+    txtPath.Left = 2760
+    txtPath.Width = 2415
     picIcons.Visible = False
 End Sub
 
@@ -1056,8 +1070,8 @@ Private Sub TreeView1_MouseMove(Button As Integer, Shift As Integer, X As Single
         TreeView1.DragIcon = TreeView1.SelectedItem.CreateDragImage
         TreeView1.Drag vbBeginDrag '拖动操作。
     End If
-    txtPath.Left = 2640
-    txtPath.Width = 2295
+    txtPath.Left = 2760
+    txtPath.Width = 2415
     picIcons.Visible = False
 End Sub
 Private Sub TreeView1_DragOver(Source As Control, X As Single, Y As Single, State As Integer)

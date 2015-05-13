@@ -86,7 +86,7 @@ Begin VB.Form frmSetting
          Left            =   240
          TabIndex        =   1
          Top             =   360
-         Width           =   735
+         Width           =   1335
       End
       Begin VB.OptionButton optPictureSuff_Other 
          Caption         =   "ÆäËûÄ¿Â¼"
@@ -95,7 +95,7 @@ Begin VB.Form frmSetting
          Left            =   240
          TabIndex        =   2
          Top             =   840
-         Width           =   1095
+         Width           =   1335
       End
       Begin VB.CommandButton cmdWallpaper 
          Caption         =   "±³¾°Í¼Æ¬"

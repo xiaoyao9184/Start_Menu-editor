@@ -37,7 +37,7 @@ Begin VB.Form frmAbout
       Width           =   2895
    End
    Begin VB.Label LblScroll 
-      Caption         =   $"frmAbout.frx":01D1
+      Caption         =   $"frmAbout.frx":0248
       Height          =   255
       Left            =   1920
       TabIndex        =   4
@@ -56,14 +56,14 @@ Begin VB.Form frmAbout
    Begin VB.Image Img1 
       Height          =   600
       Left            =   0
-      Picture         =   "frmAbout.frx":0262
+      Picture         =   "frmAbout.frx":02D9
       Top             =   0
       Width           =   210
    End
    Begin VB.Image Img2 
       Height          =   1680
       Left            =   0
-      Picture         =   "frmAbout.frx":062C
+      Picture         =   "frmAbout.frx":06A3
       Top             =   360
       Width           =   1785
    End
@@ -93,10 +93,10 @@ Attribute VB_Exposed = False
 Private Sub cmdOK_Click()
  Unload Me
 End Sub
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 TmrScroll.Interval = 100
 End Sub
-Private Sub LblScroll_MouseMove(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub LblScroll_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 TmrScroll.Interval = 15
 End Sub
 Private Sub TmrScroll_Timer()       '定时器开始

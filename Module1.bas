@@ -50,7 +50,7 @@ Private Declare Function SelectObject Lib "gdi32" (ByVal hdc As Long, _
 Private Declare Function FillRect Lib "user32" (ByVal hdc As Long, _
         lpRect As RECT, ByVal hBrush As Long) As Long
 Private Declare Function BitBlt Lib "gdi32" (ByVal hDestDC As Long, _
-        ByVal x As Long, ByVal Y As Long, ByVal nWidth As Long, _
+        ByVal X As Long, ByVal Y As Long, ByVal nWidth As Long, _
         ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal xSrc _
         As Long, ByVal ySrc As Long, ByVal dwRop As Long) As Long
 Private Declare Function CreateBrushIndirect Lib "gdi32" (lpLogBrush _
@@ -91,8 +91,14 @@ frmMain.mAdd.Caption = GetINI("lng", "mAdd", App.Path & "\Config.ini")
 frmMain.mFront.Caption = GetINI("lng", "mFront", App.Path & "\Config.ini")
 frmMain.mBehind.Caption = GetINI("lng", "mBehind", App.Path & "\Config.ini")
 frmMain.mSub.Caption = GetINI("lng", "mSub", App.Path & "\Config.ini")
+frmMain.mUp.Caption = GetINI("lng", "mUp", App.Path & "\Config.ini")
 frmMain.mDown.Caption = GetINI("lng", "mDown", App.Path & "\Config.ini")
 frmMain.mDele.Caption = GetINI("lng", "mDele", App.Path & "\Config.ini")
+frmMain.mEdit.Caption = GetINI("lng", "mEdit", App.Path & "\Config.ini")
+frmMain.mAddIm.Caption = GetINI("lng", "mAddIm", App.Path & "\Config.ini")
+frmMain.mDeleIm.Caption = GetINI("lng", "mDeleIm", App.Path & "\Config.ini")
+frmMain.mOpenIm.Caption = GetINI("lng", "mOpenIm", App.Path & "\Config.ini")
+
 
 frmMain.cmdRes.Caption = GetINI("lng", "cmdRes", App.Path & "\Config.ini")
 frmMain.Frame1.Caption = GetINI("lng", "Frame1", App.Path & "\Config.ini")
@@ -494,15 +500,15 @@ End If
     iLine 5, 220 - H - 20 - 4 - 1 + (ALLname(0) - 1) * CInt(frmMain.txtY.Text) + 1, CInt(frmMain.txtX.Text) - 2 - 2, CInt(frmMain.txtY.Text) - 2 - 1, frmMain.lblColor(6).BackColor, True
 
 End Sub
-Public Sub iLine(x%, Y%, W%, H%, iColor As Long, iTF As Boolean)
+Public Sub iLine(X%, Y%, W%, H%, iColor As Long, iTF As Boolean)
 Dim X2%, Y2%
-    X2 = x + W: Y2 = Y + H
+    X2 = X + W: Y2 = Y + H
     frmMain.Wallpaper.CurrentX = 0
     frmMain.Wallpaper.CurrentY = 0
     If iTF = True Then
-        frmMain.Wallpaper.Line Step(x, Y)-(X2, Y2), iColor, B
+        frmMain.Wallpaper.Line Step(X, Y)-(X2, Y2), iColor, B
     Else
-        frmMain.Wallpaper.Line Step(x, Y)-(X2, Y2), iColor, BF
+        frmMain.Wallpaper.Line Step(X, Y)-(X2, Y2), iColor, BF
     End If
 End Sub
 Public Sub PPicture()
